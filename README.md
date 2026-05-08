@@ -41,7 +41,7 @@ Klipy has a significantly better search engine — results are relevant, varied,
 
 ## Preview
 
-> *(Screenshots coming soon)*
+![BetterGif in action](assets/preview.png)
 
 ---
 
