@@ -74,7 +74,6 @@ module.exports = class BetterGif {
 
     _cacheDiscordModules() {
         try {
-            // Clés utilisées par BetterDiscord en interne (discordmodules.ts officiel)
             this._messageActions = BdApi.Webpack.getByKeys("jumpToMessage", "_sendMessage")
                                 || BdApi.Webpack.getByKeys("sendMessage", "editMessage");
 
@@ -187,8 +186,6 @@ module.exports = class BetterGif {
     }
 
     openSettings() {
-        // BetterDiscord n'a pas d'API directe pour ouvrir les settings,
-        // mais le modal de confirmation guide déjà l'utilisateur
         BdApi.UI.showToast("Go to Settings → Plugins → BetterGif → ⚙️", { type: "info" });
     }
 
@@ -1053,7 +1050,6 @@ module.exports = class BetterGif {
 
         const msgObj = { content: url, tts: false, invalidEmojis: [], validNonShortcutEmojis: [] };
 
-        // Méthode 1 : sendMessage avec signature complète (channelId, msg, waitForReady, options)
         try {
             const MA = BdApi.Webpack.getByKeys("jumpToMessage", "_sendMessage")
                     || BdApi.Webpack.getByKeys("sendMessage", "editMessage");
@@ -1065,7 +1061,6 @@ module.exports = class BetterGif {
             }
         } catch (e) { console.error("[BetterGif] sendMessage erreur:", e); }
 
-        // Méthode 2 : _sendMessage avec 3ème argument {}
         try {
             const MA = BdApi.Webpack.getByKeys("jumpToMessage", "_sendMessage");
             if (typeof MA?._sendMessage === "function") {
@@ -1076,7 +1071,6 @@ module.exports = class BetterGif {
             }
         } catch (e) { console.error("[BetterGif] _sendMessage erreur:", e); }
 
-        // Méthode 3 : INSERT_TEXT + clic bouton d'envoi
         try {
             const CD = this._componentDispatch || BdApi.Webpack.getByKeys("dispatchToLastSubscribed");
             if (CD?.dispatchToLastSubscribed) {
